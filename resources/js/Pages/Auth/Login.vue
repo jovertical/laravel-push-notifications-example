@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { Head, Link, useForm } from '@inertiajs/vue3';
+
 import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps<{
     canResetPassword?: boolean;
@@ -83,7 +84,11 @@ const submit = () => {
                     Forgot your password?
                 </Link>
 
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton
+                    class="ml-4"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
                     Log in
                 </PrimaryButton>
             </div>
