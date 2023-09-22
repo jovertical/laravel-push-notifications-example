@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { usePushNotifications } from '@/use/pushNotifications';
 
 const { enabled } = usePushNotifications();
+
+const send = () => {
+    router.post(route('send-notification'));
+};
 </script>
 
 <template>
@@ -26,11 +30,11 @@ const { enabled } = usePushNotifications();
                             Receive a push notification
                         </div>
 
-                        <div class="p-6">
-                            <PrimaryButton :disabled="!enabled">
+                        <form @submit.prevent="send" class="p-6">
+                            <PrimaryButton type="submit" :disabled="!enabled">
                                 Send
                             </PrimaryButton>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

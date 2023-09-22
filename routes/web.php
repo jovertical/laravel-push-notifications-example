@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PushSubscriptionController;
+use App\Http\Controllers\SendNotificationController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,6 +38,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/push-subscriptions', PushSubscriptionController::class)
         ->only(['store', 'destroy']);
+
+    Route::post('/send-notification', SendNotificationController::class)
+        ->name('send-notification');
 });
 
 require __DIR__ . '/auth.php';

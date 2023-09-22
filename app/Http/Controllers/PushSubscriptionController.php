@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use NotificationChannels\WebPush\PushSubscription;
 
@@ -20,12 +21,19 @@ class PushSubscriptionController extends Controller
         $user = auth()->user();
 
         return $user->updatePushSubscription(
-            ...Arr::only($input, ['endpoint', 'keys.p256dh', 'keys.auth']),
+            Arr::get($input, 'endpoint'),
+            Arr::get($input, 'keys.p256dh'),
+            Arr::get($input, 'keys.auth')
         );
     }
 
-    public function destroy()
+    public function destroy(PushSubscription $subscription): Response
     {
-        //
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        $user->deletePushSubscription($subscription->endpoint);
+
+        return response()->noContent();
     }
 }
