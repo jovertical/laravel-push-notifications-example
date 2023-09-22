@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
+
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { usePushNotifications } from '@/use/pushNotifications';
+
+const { enabled } = usePushNotifications();
 </script>
 
 <template>
@@ -23,7 +27,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
                         </div>
 
                         <div class="p-6">
-                            <PrimaryButton>Send</PrimaryButton>
+                            <PrimaryButton :disabled="!enabled">
+                                Send
+                            </PrimaryButton>
                         </div>
                     </div>
                 </div>

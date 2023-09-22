@@ -1,13 +1,15 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import laravel from 'laravel-vite-plugin';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
     plugins: [
         laravel({
             input: 'resources/js/app.ts',
             refresh: true,
+            detectTls: 'laravel-push-notifications-example.test',
         }),
+
         vue({
             template: {
                 transformAssetUrls: {
@@ -20,6 +22,7 @@ export default defineConfig({
 
     server: {
         port: 3000,
-        host: 'laravel-push-notifications-example.test'
-    }
+        host: 'laravel-push-notifications-example.test',
+        https: true,
+    },
 });
